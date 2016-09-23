@@ -45,17 +45,64 @@ app.get('/', function homepage(req, res) {
 app.get('/api', function api_index(req, res) {
   // TODO: Document all your api endpoints below
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
-    message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    woopsIForgotToDocumentAllMyEndpoints: false, // CHANGE ME ;)
+    message: "Welcome to my personal api! This is an interactive map of Oakland, where you can create a neighborhood and mark it on the map.",
+    documentationUrl: "https://github.com/amblount/express-personal-api/NeighborhoodsAPI.md", // CHANGE ME
+    baseUrl: "https://oakland-neighborhoods.herokuapp.com/",
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/profile", description: "Data about me"},
+      {method: "GET", path: "/api/neighborhoods", description: "View all neighborhoods"},
+      {method: "GET", path: "/api/neighborhoods/:id", description: "View one neighborhood"},
+      {method: "POST", path: "/api/neighborhoods", description: "Create a new neighborhood"},
+      {method: "PUT", path: "/api/neighborhoods/:id", description: "Edit an existing neighborhood"},
+      {method: "DELETE", path: "/api/neighborhoods/:id", description: "Destroy an existing neighborhood"},
     ]
   })
 });
+
+// show profile page
+app.get('/api/profile', function api_profile(req, res) {
+  res.json(profile)
+})
+
+// neighborhoods index
+app.get('/api/neighborhoods', function api_profile(req, res) {
+  res.json(neighborhoods)
+})
+
+// neighborhoods show
+app.get('/api/neighborhoods/:id', function api_profile(req, res) {
+  for(var i = 0; i < neighborhoods.length; i++) {
+    if (neighborhoods[i] === req.params.id) {
+      res.json(neighborhoods[i])
+    }
+  }
+})
+
+// neighborhoods create
+app.post('/api/neighborhoods/:id', function api_profile(req, res) {
+  res.json({
+
+  })
+})
+
+// neighborhoods update
+app.put('/api/neighborhoods/:id', function api_profile(req, res) {
+  res.json({
+
+  })
+})
+
+// neighborhoods delete
+app.delete('/api/neighborhoods/:id', function api_profile(req, res) {
+  res.json({
+
+  })
+})
+
+
+
 
 /**********
  * SERVER *
