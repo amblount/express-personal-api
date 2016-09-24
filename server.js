@@ -68,12 +68,14 @@ app.get('/api/profile', function api_profile(req, res) {
 
 // neighborhoods index
 app.get('/api/neighborhoods', function api_profile(req, res) {
-  res.json(neighborhoods)
+  var neighborhoods = db.Neighborhood.find();
+  console.log(neighborhoods);
+  res.json(JSON.parse(neighborhoods));
 })
 
 // neighborhoods show
 app.get('/api/neighborhoods/:id', function api_profile(req, res) {
-  db.Neighborhoods.findOne({_.id req.params._id }, function(err, data) {
+  db.Neighborhoods.findOne({_id: req.params._id }, function(err, data) {
     res.json(data)
   })
 })
@@ -86,14 +88,14 @@ app.post('/api/neighborhoods/:id', function api_profile(req, res) {
     description: req.body.description
   });
   // save newNeighborhood to datadase
-  newNeighborhood.save(err, neighborhood){
+  newNeighborhood.save(function(err, neighborhood) {
     if(err){
       return console.log('save error:' + err)
     }
     console.log('saved',neighborhood.name );
     // send back the Neighborhood
     res.json(neighborhood)
-  }
+  });
 })
 
 // neighborhoods update

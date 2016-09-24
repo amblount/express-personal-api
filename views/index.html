@@ -19,10 +19,23 @@
   </head>
   <body>
     <div class="container">
+      <div class="text-center">
+        <h1>Welcome to the Neighborhood</h1>
+        <h4><a href="/api">Read My API Documentation</a></h4>
+      </div>
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <h1>Under Construction</h1>
-          <h4><a href="/api">Read My API Documentation</a></h4>
+          <form class="form-inline" id="newNeighborhoodForm">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="name" placeholder="Neighborhood Name">
+          </div>
+          <div class="form-group">
+            <label for="title">Author</label>
+            <input type="textbox" class="form-control" name="description" placeholder="Neighborhood Description">
+          </div>
+          <button type="submit" class="btn btn-default">Create book</button>
+          </form>
         </div>
       </div>
     </div>
