@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -73,18 +73,27 @@ app.get('/api/neighborhoods', function api_profile(req, res) {
 
 // neighborhoods show
 app.get('/api/neighborhoods/:id', function api_profile(req, res) {
-  for(var i = 0; i < neighborhoods.length; i++) {
-    if (neighborhoods[i] === req.params.id) {
-      res.json(neighborhoods[i])
-    }
-  }
+  db.Neighborhoods.findOne({_.id req.params._id }, function(err, data) {
+    res.json(data)
+  })
 })
 
 // neighborhoods create
 app.post('/api/neighborhoods/:id', function api_profile(req, res) {
-  res.json({
-
-  })
+  // create a new neighborhood with form data
+  var newNeighborhood = new db.Neighborhood({
+    name: req.body.name,
+    description: req.body.description
+  });
+  // save newNeighborhood to datadase
+  newNeighborhood.save(err, neighborhood){
+    if(err){
+      return console.log('save error:' + err)
+    }
+    console.log('saved',neighborhood.name );
+    // send back the Neighborhood
+    res.json(neighborhood)
+  }
 })
 
 // neighborhoods update

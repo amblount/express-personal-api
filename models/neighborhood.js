@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var NeighborhoodSchema = new Schema({
   name: String,
-  description: String,
+  description: String
 });
 
 var Neighborhood = mongoose.model('Neighborhood', NeighborhoodSchema);
