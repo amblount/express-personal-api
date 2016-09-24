@@ -98,17 +98,29 @@ app.post('/api/neighborhoods/:id', function api_profile(req, res) {
 
 // neighborhoods update
 app.put('/api/neighborhoods/:id', function api_profile(req, res) {
-  res.json({
-
-  })
+  // get neighborhood from url params
+  var neighborhoodId = req.params.id;
+  // find neighborhood by id in db
+  Neighborhood.findOne({ _id: neighborhoodId }, function(err, foundNeighborhood) {
+    // update attributes
+    foundNeighborhood.name = req.body.name;
+    foundNeighborhood.description = req.body.description;
+    // save updated neighborhood in db
+    foundNeighborhood.save(function(err, savedNeighborhood) {
+      res.json(savedNeighborhood);
+    });
+  });
 })
 
 // neighborhoods delete
 app.delete('/api/neighborhoods/:id', function api_profile(req, res) {
-  res.json({
-
-  })
-})
+  // get neighborhood id from url params (req.params)
+  var neighborhoodId = req.params.id;
+  // find selected neighborhood to remove in DATABASE
+  Neighborhood.findOneAndRemove({ _id: neighborhoodId }, function(err, deletedNeighborhood) {
+    res.json(deletedNeighborhood);
+  });
+});
 
 
 
