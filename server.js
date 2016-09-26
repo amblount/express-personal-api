@@ -20,6 +20,9 @@ app.use(function(req, res, next) {
  ************/
 
 var db = require('./models');
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+
 
 /**********
  * ROUTES *
@@ -86,9 +89,10 @@ app.get('/api/profile', function api_profile(req, res) {
 
 // neighborhoods index
 app.get('/api/neighborhoods', function api_profile(req, res) {
-  var neighborhoods = db.Neighborhood.find();
-  console.log(neighborhoods);
-  res.json(JSON.parse(neighborhoods));
+  db.Neighborhood.find({}).exec(function(err, neighborhoods){
+    res.json(neighborhoods);
+  })
+
 })
 
 // neighborhoods show
