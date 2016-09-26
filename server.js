@@ -63,7 +63,25 @@ app.get('/api', function api_index(req, res) {
 
 // show profile page
 app.get('/api/profile', function api_profile(req, res) {
-  res.json(profile)
+  var pdf ="/public/images/2_Blount_Alivia_RMW.pdf";
+  var options = {
+    root: __dirname + '',
+    dotfiles: 'deny',
+    headers: {
+        'x-timestamp': Date.now(),
+        'x-sent': true
+    }
+  };
+
+  res.sendFile(pdf, options, function (err) {
+    if (err) {
+      console.log(err);
+      res.status(err.status).end();
+    }
+    else {
+      console.log('Sent:', fileName);
+    }
+  });
 })
 
 // neighborhoods index
